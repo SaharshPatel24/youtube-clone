@@ -8,10 +8,10 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { VisibilitySharp } from '@mui/icons-material';
 
-const VideoCard = (props: any) => {
-    const Url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + props.props.id.videoId + "&key=AIzaSyAxd5S2TAk2vhoQdhzSZqKDNTv_ok_-yos";
+const VideoCard = (snippet: any) => {
+    const Url = "https://www.googleapis.com/youtube/v3/videos?part=statistics&id=" + snippet.snippet.id.videoId + "&key=AIzaSyAxd5S2TAk2vhoQdhzSZqKDNTv_ok_-yos";
 
-    const { isLoading, error, data } = useQuery('repoData', () =>
+    const { isLoading, error, data } = useQuery('statData', () =>
         fetch(Url).then(res =>
             res.json().then(data => data.items),
         )
@@ -29,15 +29,15 @@ const VideoCard = (props: any) => {
                     component="img"
                     width="200"
                     height="200"
-                    image={props.props.snippet.thumbnails.high.url}
+                    image={snippet.snippet.snippet.thumbnails.high.url}
                     alt="green iguana"
                 />
                 <CardContent sx={{ fontSize: 10 }}>
                     <Typography gutterBottom variant="body1" component="div">
-                        {props.props.snippet.title}
+                        {snippet.snippet.snippet.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {props.props.snippet.channelTitle}
+                        {snippet.snippet.snippet.channelTitle}
                     </Typography>
                 </CardContent>
             </CardActionArea>
